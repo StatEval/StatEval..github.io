@@ -1089,8 +1089,31 @@
           </div>
       </div>
   </section>
+
+  <script>
+      const tabs = document.querySelectorAll(".eval-tab");
+      const panels = document.querySelectorAll(".eval-panel");
+  
+      tabs.forEach(tab => {
+          tab.addEventListener("click", () => {
+              // 切换 tab 样式
+              tabs.forEach(t => t.classList.remove("active", "border-primary", "text-primary"));
+              tabs.forEach(t => t.classList.add("border-transparent", "text-gray-500"));
+              tab.classList.add("active", "border-primary", "text-primary");
+              tab.classList.remove("border-transparent", "text-gray-500");
+  
+              // 切换 panel 显示
+              panels.forEach(panel => panel.classList.add("hidden"));
+              panels.forEach(panel => panel.classList.remove("active"));
+              const target = document.querySelector(`#${tab.dataset.tab}-panel`);
+              target.classList.remove("hidden");
+              target.classList.add("active");
+          });
+      });
+  </script>
 </body>
 
 </html>
+
 
 

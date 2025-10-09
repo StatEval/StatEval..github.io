@@ -815,53 +815,40 @@ document.addEventListener('DOMContentLoaded', function() {
             <h3 class="text-xl font-semibold mb-4">2. Data Processing Pipeline</h3>
           
             <p class="text-gray-700 mb-6">
-              The <strong>StatEval</strong> data processing pipeline serves two complementary purposes: (i) to support large-scale, reliable extraction of Statistical research datasets from heterogeneous sources, and (ii) to conduct systematic quality inspection for the Foundational Knowledge dataset.  
-              It integrates LLMs with human-in-the-loop verification to ensure both scalability and precision, and incorporates few-shot feedback from human reviewers to iteratively enhance performance.
-              The pipeline consists of four core agents, each responsible for a distinct stage of the end-to-end workflow.
+              The <strong>StatEval</strong> pipeline extracts and standardizes problems from diverse academic sources using LLMs (GPT-5, Gemini series) combined with human-in-the-loop verification. 
+              It consists of five core stages that convert raw documents into high-quality, structured evaluation data.
             </p>
           
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mt-8">
               <!-- Step 1 -->
               <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">1. File-Conversion Agent</h4>
+                <h4 class="font-medium text-gray-900 mb-2">1. File Conversion</h4>
                 <p class="text-gray-600 text-sm">
-                  Converts raw documents of diverse formats—including PDFs, scanned files, and <span class="font-mono">LaTeX</span> sources—into clean, structured text.  
-                  Multi-modal LLMs (e.g., <em>MinerU</em>) are employed for OCR and text reconstruction, producing <span class="font-mono">LaTeX</span>-compatible outputs that preserve mathematical expressions for downstream processing.
+                  Converts PDFs, scanned files, and <span class="font-mono">LaTeX</span> sources into structured text using multi-modal LLMs like <em>MinerU</em>.
                 </p>
               </div>
           
               <!-- Step 2 -->
               <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">2. Context-Segmentation Agent</h4>
+                <h4 class="font-medium text-gray-900 mb-2">2. Context Segmentation</h4>
                 <p class="text-gray-600 text-sm">
-                  Extracts theorems and their surrounding context to support problem generation.  
-                  Utilizes dynamic regular-expression frameworks driven by LLMs (e.g., Gemini series) to identify structural elements such as <span class="font-mono">Theorem</span>, <span class="font-mono">Lemma</span>, and <span class="font-mono">Example</span>.  
-                  Ensures each fragment is self-contained by retrieving relevant preceding definitions, assumptions, and related sections.
+                  Extracts theorems and relevant context using LLM-driven patterns (Gemini series), ensuring each fragment is self-contained.
                 </p>
               </div>
           
               <!-- Step 3 -->
               <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">3. Problem-Generation Agent</h4>
+                <h4 class="font-medium text-gray-900 mb-2">3. Problem Generation</h4>
                 <p class="text-gray-600 text-sm">
-                  Transforms extracted theorems and context into question–answer (QA) pairs following a rubric-based framework.  
-                  Uses reasoning-optimized GPT-5 models to reconstruct problems accurately.  
-                  Each question follows strict criteria:
+                  Transforms theorems and context into QA pairs using GPT-5, following rules for difficulty, self-containment, single-answer constraints, and quantitative verifiability.
                 </p>
-                <ul class="list-disc ml-5 mt-2 text-gray-600 text-sm">
-                  <li>Appropriate difficulty aligned with advanced coursework or research-level challenges.</li>
-                  <li>Self-contained problems with sufficient background.</li>
-                  <li>No answer leakage of intermediate steps or final results.</li>
-                  <li>Single-answer constraint for objective evaluation.</li>
-                  <li>Quantitative verifiability through explicit numbers, expressions, distributions, rates, or bounds.</li>
-                </ul>
               </div>
           
               <!-- Step 4 -->
               <div class="bg-neutral rounded-lg border border-gray-200 p-5">
-                <h4 class="font-medium text-gray-900 mb-2">4. Quality-Control Agent</h4>
+                <h4 class="font-medium text-gray-900 mb-2">4. Quality Control</h4>
                 <p class="text-gray-600 text-sm">
-                  Each QA pair is automatically validated using GPT-5-based quality-control agents, checking adherence to the rubric and internal consistency.
+                  Automated validation with GPT-5 checks rubric compliance and consistency before human review.
                 </p>
               </div>
           
@@ -869,14 +856,13 @@ document.addEventListener('DOMContentLoaded', function() {
               <div class="bg-neutral rounded-lg border border-gray-200 p-5">
                 <h4 class="font-medium text-gray-900 mb-2">5. Human Check & Feedback</h4>
                 <p class="text-gray-600 text-sm">
-                  Human experts review samples that pass automated checks, confirming semantic correctness, difficulty appropriateness, and dataset classification.  
-                  Feedback is periodically incorporated as few-shot exemplars to iteratively improve segmentation and generation agents, enhancing overall precision and robustness.
+                  Experts verify semantic correctness, difficulty, and dataset classification. Feedback is used to improve agents iteratively.
                 </p>
               </div>
             </div>
           
             <p class="text-gray-700 mt-8">
-              By combining LLM-based reasoning, dynamic segmentation, and human-in-the-loop verification, the <strong>StatEval pipeline</strong> converts scholarly materials into standardized evaluation data that is academically faithful, quantitatively verifiable, and suitable for research on model reasoning and statistical understanding.
+              This pipeline enables fully automated conversion of scholarly materials into standardized, high-quality evaluation datasets for statistical reasoning tasks.
             </p>
           
             <!-- Pipeline Figure -->
@@ -887,6 +873,7 @@ document.addEventListener('DOMContentLoaded', function() {
               </p>
             </div>
           </div>
+
 
 
 
@@ -1112,6 +1099,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+
 
 
 
